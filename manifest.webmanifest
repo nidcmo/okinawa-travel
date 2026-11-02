@@ -1,0 +1,27 @@
+{
+  "id": "./",
+  "name": "沖繩四天三夜｜海風日和旅行手帖",
+  "short_name": "沖繩旅遊",
+  "description": "可編輯行程、天氣資訊、台日雙時鐘與旅遊待辦清單。",
+  "lang": "zh-Hant",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#FFFDF9",
+  "theme_color": "#FFFDF9",
+  "icons": [
+    {
+      "src": "./icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

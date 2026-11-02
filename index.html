@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#FFFDF9">
+<title>沖繩 4 天 3 夜｜海風日和旅行手帖</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Huninn&family=Noto+Sans+TC:wght@400;500;700;900&display=swap');
+:root{
+ --paper:#FFFDF9;--ink:#3E3A39;--pink:#F4A69A;--yellow:#FAD77B;
+ --blue:#A4D4EC;--green:#C2E0B4;--muted:#817B75;--line:#E9E1D8;
+ --cream:#FFFBF3;--mist:#FCEFEF;--ice:#EAF4FC;--milk:#EADFD2;
+ --sky:#EBF7FC;--butter:#FEECA6;--winter:#EAF4FC;--winter-ink:#35516A;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:'Huninn','Noto Sans TC',sans-serif;line-height:1.7}
+a{color:inherit}
+.wrap{max-width:1060px;margin:auto;padding:24px}
+.hero{position:relative;overflow:hidden;border:3px solid var(--ink);border-radius:28px;padding:42px 34px 30px;background:#F8F1E8}
+.kicker{display:inline-block;background:var(--yellow);border:2px solid var(--ink);border-radius:30px;padding:4px 14px;font-size:14px}
+h1{font-size:clamp(38px,7vw,70px);line-height:1.12;margin:18px 0 8px;letter-spacing:2px}
+.subtitle{font-size:19px;color:#625B55;margin:0}
+.hero-art{width:100%;max-width:620px;display:block;margin:20px auto 0}
+.stamp{position:absolute;right:28px;top:28px;border:2px dashed var(--pink);color:#C66D65;border-radius:50%;width:90px;height:90px;display:grid;place-items:center;text-align:center;transform:rotate(10deg);font-size:15px}
+.info{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:18px 0 34px}
+.info div{border:2px solid var(--ink);border-radius:18px;padding:13px 16px;background:white}
+.info b{display:block;font-size:13px;color:var(--muted);font-weight:400}
+.info span{font-size:18px}
+h2{font-size:30px;margin:38px 0 14px}
+.section-note{color:var(--muted);margin-top:-8px}
+.days{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.day{border:3px solid var(--ink);border-radius:22px;overflow:hidden;background:white}
+.day-head{padding:14px 20px;display:flex;align-items:center;justify-content:space-between;border-bottom:2px solid var(--ink)}
+.day:nth-child(1) .day-head{background:var(--pink)}
+.day:nth-child(2) .day-head{background:var(--yellow)}
+.day:nth-child(3) .day-head{background:var(--blue)}
+.day:nth-child(4) .day-head{background:var(--green)}
+.day-head strong{font-size:23px}
+.day-head small{font-size:13px}
+.day-body{padding:18px 20px;outline:none}
+.day-body[contenteditable="true"]:focus{background:#FFFEFB}
+.edit-hint{font-size:12px;color:var(--muted);padding:0 20px 8px}
+.day-tools{display:flex;gap:8px;flex-wrap:wrap;padding:0 20px 16px}
+.day-tools button{cursor:pointer;font:inherit;font-size:13px;border:1.5px solid var(--ink);border-radius:20px;padding:5px 11px;background:var(--cream);color:var(--ink)}
+.day-tools button:hover{background:var(--yellow)}
+
+.stop{display:grid;grid-template-columns:58px 1fr;gap:10px;padding:10px 0;border-bottom:1px dashed var(--line)}
+.stop:last-child{border:0}
+.time{font-weight:bold;font-size:14px;color:#A36D63;padding-top:2px}
+.stop h3{margin:0;font-size:18px}
+.stop p{margin:3px 0 0;color:#6F6963;font-size:14px}
+.tag{display:inline-block;font-size:12px;background:#F5F0E9;border-radius:20px;padding:2px 9px;margin-top:7px}
+.panel{border:3px solid var(--ink);border-radius:22px;padding:22px;background:#F4F8F2;margin:28px 0}
+.panel h2{margin:0 0 10px;font-size:25px}
+.tips{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.tip{background:white;border:2px solid var(--ink);border-radius:16px;padding:13px}
+.tip b{display:block;margin-bottom:4px}
+.links{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+.btn{display:inline-block;text-decoration:none;border:2px solid var(--ink);border-radius:30px;padding:8px 14px;background:white;font-size:14px}
+.btn:hover{transform:translateY(-2px);background:var(--yellow)}
+.budget{width:100%;border-collapse:collapse;background:white;border:2px solid var(--ink);border-radius:14px;overflow:hidden}
+.budget td,.budget th{padding:10px 12px;border-bottom:1px solid var(--line);text-align:left}
+.budget th{background:#F8E9E4}
+footer{text-align:center;color:var(--muted);padding:30px 10px;font-size:13px}
+@media(max-width:700px){.wrap{padding:14px}.hero{padding:30px 20px 18px}.stamp{width:68px;height:68px;font-size:12px;right:14px;top:14px} .info{grid-template-columns:1fr}.days{grid-template-columns:1fr}.tips{grid-template-columns:1fr}h2{font-size:26px}}
+
+
+body.winter{background:#F1F7FC;color:var(--winter-ink)}
+body.winter .hero{background:#EAF4FC}
+body.winter .day:nth-child(1) .day-head{background:#DCEBFA}
+body.winter .day:nth-child(2) .day-head{background:#E8E5F5}
+body.winter .day:nth-child(3) .day-head{background:#D9F0F0}
+body.winter .day:nth-child(4) .day-head{background:#F3E9D9}
+body.winter .panel{background:#EFF6FC!important}
+body.winter .navbar{background:rgba(234,244,252,.95)}
+.season-btn{cursor:pointer;font:inherit;border:2px solid var(--ink);border-radius:22px;padding:7px 13px;background:#EAF4FC;color:var(--ink)}
+.weather-panel{border:3px solid var(--ink);border-radius:22px;background:#F0F8FC;padding:18px;margin:22px 0}
+.weather-top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.weather-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-top:12px}
+.weather-day{background:white;border:1.5px solid var(--ink);border-radius:14px;padding:11px;text-align:center}
+.weather-day b{display:block}
+.weather-day .emoji{font-size:27px}
+.weather-day small{color:var(--muted)}
+.clock-panel{display:flex;justify-content:space-around;gap:12px;flex-wrap:wrap;background:var(--cream);border:2px solid var(--ink);border-radius:17px;padding:13px;margin:14px 0}
+.clock{text-align:center;min-width:130px}
+.clock b{display:block;font-size:12px;color:var(--muted)}
+.clock span{font-size:25px;font-weight:bold;font-variant-numeric:tabular-nums}
+.weather-status{font-size:13px;color:var(--muted);margin-top:8px}
+.navbar{position:sticky;top:0;z-index:10;display:flex;gap:8px;justify-content:center;flex-wrap:wrap;
+ background:rgba(255,251,243,.94);backdrop-filter:blur(8px);padding:10px;border-bottom:2px solid var(--line)}
+.navbar a{font-size:14px;text-decoration:none;border:2px solid var(--ink);border-radius:22px;padding:5px 13px;background:white}
+.countdown{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:18px}
+.countdown label{font-size:14px;color:var(--muted)}
+.countdown input{font:inherit;border:2px solid var(--ink);border-radius:12px;padding:7px;background:white;color:var(--ink)}
+.count-number{background:var(--yellow);border:2px solid var(--ink);border-radius:14px;padding:6px 12px;font-weight:bold}
+.flight{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:18px 0}
+.flight-card{border:2px solid var(--ink);border-radius:17px;padding:14px;background:var(--ice)}
+.flight-card:nth-child(2){background:var(--mist)}
+.flight-card b{display:block;font-size:13px;color:var(--muted)}
+.flight-card span{font-size:18px}
+.day-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0}
+.day-tabs button{cursor:pointer;font:inherit;border:2px solid var(--ink);border-radius:25px;padding:8px 15px;background:white;color:var(--ink)}
+.day-tabs button.active{background:var(--yellow);transform:translateY(-2px)}
+.day.is-hidden{display:none}
+.must{display:inline-block;background:#FCEFEF;border:1px solid #D78D86;border-radius:20px;padding:1px 8px;font-size:11px;color:#9D554F;margin-left:5px}
+.transport{display:inline-block;border-radius:20px;padding:2px 9px;margin-top:7px;font-size:12px;background:var(--sky);border:1px solid #B6D8E8}
+.checklist{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}
+.checkitem{background:white;border:1.5px solid var(--ink);border-radius:12px;padding:9px 11px}
+.checkitem input{accent-color:#78A98A;transform:scale(1.15);margin-right:7px}
+.lodging{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.lodging div{background:white;border:2px solid var(--ink);border-radius:15px;padding:14px}
+.lodging input{width:100%;font:inherit;border:1.5px solid var(--line);border-radius:9px;padding:7px;margin-top:6px}
+@media(max-width:700px){.flight,.lodging,.checklist{grid-template-columns:1fr}.navbar{justify-content:flex-start;overflow:auto;flex-wrap:nowrap}.navbar a{white-space:nowrap}}
+@media print{body{background:white}.wrap{max-width:none}.btn,.navbar,.day-tabs{display:none}.day{break-inside:avoid}}
+
+</style>
+<link rel="manifest" href="./manifest.webmanifest">
+<meta name="theme-color" content="#FFFDF9">
+<link rel="apple-touch-icon" href="./icons/icon-192.png">
+<link rel="icon" type="image/png" href="./icons/icon-192.png">
+<style>
+.install-banner{position:fixed;left:14px;right:14px;bottom:14px;z-index:30;display:none;
+ background:#FFFBF3;border:2px solid #3E3A39;border-radius:18px;padding:12px 14px;
+ box-shadow:0 5px 20px #3e3a3922;align-items:center;gap:10px}
+.install-banner button{font:inherit;border:2px solid #3E3A39;border-radius:20px;padding:7px 12px;background:#FAD77B}
+.install-banner .close-install{background:white}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="navbar">
+ <a href="#itinerary">每日行程</a><a href="#flight">航班資訊</a><a href="#hotel">住宿資訊</a>
+ <a href="#checklist">待辦清單</a><a href="#budget">旅費預算</a><button class="season-btn" id="winterToggle" type="button">❄️ 冬季氛圍</button>
+</nav>
+<header class="hero">
+ <span class="kicker">OKINAWA · TRAVEL JOURNAL</span>
+ <div class="stamp">島時間<br>慢慢走</div>
+ <h1>沖繩 4 天 3 夜</h1>
+ <p class="subtitle">跟著海風散步，把藍色的假期收進口袋。</p>
+ <div class="countdown">
+  <label for="departDate">設定出發日期</label>
+  <input id="departDate" type="date">
+  <span class="count-number" id="countText">設定日期，開始倒數 ✈</span>
+ </div>
+ <svg class="hero-art" viewBox="0 0 700 245" role="img" aria-label="沖繩海邊、太陽與小島插畫">
+  <path d="M0 175 Q110 140 220 175 T440 175 T700 165 L700 245 L0 245Z" fill="#A4D4EC" stroke="#3E3A39" stroke-width="4"/>
+  <path d="M0 205 Q90 180 180 205 T360 205 T540 205 T700 200" fill="none" stroke="#FFFDF9" stroke-width="7" stroke-linecap="round"/>
+  <circle cx="555" cy="62" r="38" fill="#FAD77B" stroke="#3E3A39" stroke-width="4"/>
+  <path d="M60 170 Q125 80 205 165 Q270 112 330 170Z" fill="#C2E0B4" stroke="#3E3A39" stroke-width="4"/>
+  <path d="M105 157 Q140 118 170 157 M210 157 Q250 126 275 160" fill="none" stroke="#3E3A39" stroke-width="3"/>
+  <path d="M390 160 Q425 115 460 160 M410 160 Q430 130 450 160" fill="none" stroke="#3E3A39" stroke-width="4"/>
+  <path d="M435 162 L435 105 M435 125 Q405 95 390 115 Q410 140 435 135 M435 135 Q460 92 485 112 Q465 142 435 145" fill="#C2E0B4" stroke="#3E3A39" stroke-width="3"/>
+  <path d="M20 90 q20 -18 40 0 q20 -18 40 0" fill="none" stroke="#3E3A39" stroke-width="3" stroke-linecap="round"/>
+  <path d="M610 125 q18 -16 36 0 q18 -16 36 0" fill="none" stroke="#3E3A39" stroke-width="3" stroke-linecap="round"/>
+ </svg>
+</header>
+
+<section class="clock-panel" aria-label="台灣與日本即時時間">
+ <div class="clock"><b>🇹🇼 台灣時間</b><span id="taiwanClock">--:--:--</span></div>
+ <div class="clock"><b>🇯🇵 日本時間</b><span id="japanClock">--:--:--</span></div>
+</section>
+<section class="info">
+ <div><b>建議住宿</b><span>那霸市區連住 3 晚</span></div>
+ <div><b>交通設定</b><span>不自駕・單軌＋巴士</span></div>
+ <div><b>旅行節奏</b><span>城市散步 × 海景 × 美食</span></div>
+</section>
+
+<section id="flight">
+ <h2>✈️ 航班資訊</h2>
+ <p class="section-note">可直接點選欄位修改成自己的航班資料。</p>
+ <div class="flight">
+  <div class="flight-card"><b>去程｜航空公司・航班</b><span contenteditable="true">請輸入航班／起飛時間</span><br><small contenteditable="true">出發機場 → 那霸機場</small></div>
+  <div class="flight-card"><b>回程｜航空公司・航班</b><span contenteditable="true">請輸入航班／起飛時間</span><br><small contenteditable="true">那霸機場 → 抵達機場</small></div>
+ </div>
+</section>
+<section class="weather-panel" id="weather">
+ <div class="weather-top"><div><h2 style="margin:0">☀️ 沖繩每日天氣</h2><small>依每日行程地點顯示預報與氣溫</small></div>
+ <button class="btn" id="refreshWeather" type="button">更新天氣 ↻</button></div>
+ <div class="weather-grid" id="weatherGrid">
+  <div class="weather-day"><b>DAY 1 那霸</b><div class="emoji">🌤️</div><small>等待天氣資料…</small></div>
+  <div class="weather-day"><b>DAY 2 南部</b><div class="emoji">🌊</div><small>等待天氣資料…</small></div>
+  <div class="weather-day"><b>DAY 3 本部町</b><div class="emoji">🐠</div><small>等待天氣資料…</small></div>
+  <div class="weather-day"><b>DAY 4 首里</b><div class="emoji">🏯</div><small>等待天氣資料…</small></div>
+ </div>
+ <div class="weather-status" id="weatherStatus">請先設定出發日期；天氣服務需連接網路，通常可查詢未來約 16 天預報。</div>
+</section>
+<h2 id="itinerary">🌺 每日行程</h2>
+<div class="day-tabs" role="tablist" aria-label="切換旅遊日期">
+ <button class="active" data-day="0">DAY 1</button><button data-day="1">DAY 2</button>
+ <button data-day="2">DAY 3</button><button data-day="3">DAY 4</button><button data-day="all">全部展開</button>
+</div>
+<p class="section-note">以那霸為住宿基地安排；巴士班次、景點營業時間請依出發日期再次確認。</p>
+<section class="days">
+ <article class="day" data-day-card="0">
+  <div class="day-head"><strong>DAY 1｜抵達那霸</strong><small>市場・老街・夜色</small></div>
+  <div class="edit-hint">✏️ 可直接點選下方時間、景點名稱與介紹文字進行編輯</div><div class="day-body" contenteditable="true" spellcheck="true">
+   <div class="stop"><div class="time">下午</div><div><h3>抵達那霸機場</h3><p>搭乘沖繩都市單軌電車前往市區，先到飯店寄放行李、辦理入住。</p><span class="transport">單軌電車</span></div></div>
+   <div class="stop"><div class="time">15:00</div><div><h3>第一牧志公設市場 <span class="must">必去</span></h3><p>逛市場、感受沖繩食材與在地日常；可挑選海鮮或沖繩小吃。</p></div></div>
+   <div class="stop"><div class="time">17:00</div><div><h3>國際通散步</h3><p>伴手禮、沖繩限定零食、藥妝店一次逛，傍晚街景也很有氣氛。</p></div></div>
+   <div class="stop"><div class="time">晚上</div><div><h3>沖繩料理晚餐</h3><p>試試沖繩麵、苦瓜炒蛋、海葡萄，飯後自由逛街。</p></div></div>
+  </div>
+  <div class="day-tools">
+   <button type="button" class="add-stop">＋ 新增行程</button>
+   <button type="button" class="reset-day">還原本日原始內容</button>
+  </div>
+ </article>
+ <article class="day" data-day-card="1">
+  <div class="day-head"><strong>DAY 2｜南部海岸</strong><small>神社・海景・夕陽</small></div>
+  <div class="edit-hint">✏️ 可直接點選下方時間、景點名稱與介紹文字進行編輯</div><div class="day-body" contenteditable="true" spellcheck="true">
+   <div class="stop"><div class="time">09:00</div><div><h3>波上宮</h3><p>走訪懸崖上的海邊神社，順遊波之上海灘。</p><span class="transport" style="background:var(--green)">巴士／步行</span></div></div>
+   <div class="stop"><div class="time">11:30</div><div><h3>瀨長島 Umikaji Terrace <span class="must">必去</span></h3><p>白色階梯建築、海景咖啡與飛機起降景色；適合慢慢吃午餐、拍照。</p><span class="transport" style="background:var(--pink)">巴士／計程車</span></div></div>
+   <div class="stop"><div class="time">15:30</div><div><h3>回那霸市區</h3><p>留一點空檔休息，或到飯店附近咖啡店坐坐。</p></div></div>
+   <div class="stop"><div class="time">傍晚</div><div><h3>國際通周邊晚餐</h3><p>可安排居酒屋或沖繩家庭料理，享受不趕行程的夜晚。</p></div></div>
+  </div>
+  <div class="day-tools">
+   <button type="button" class="add-stop">＋ 新增行程</button>
+   <button type="button" class="reset-day">還原本日原始內容</button>
+  </div>
+ </article>
+ <article class="day" data-day-card="2">
+  <div class="day-head"><strong>DAY 3｜北部一日遊</strong><small>水族館・海洋風景</small></div>
+  <div class="edit-hint">✏️ 可直接點選下方時間、景點名稱與介紹文字進行編輯</div><div class="day-body" contenteditable="true" spellcheck="true">
+   <div class="stop"><div class="time">07:30</div><div><h3>那霸出發前往美麗海</h3><p>建議預約高速巴士或一日觀光巴士；車程較長，提早出發較充裕。</p><span class="transport" style="background:var(--yellow)">預約巴士</span></div></div>
+   <div class="stop"><div class="time">10:30</div><div><h3>沖繩美麗海水族館 <span class="must">必去</span></h3><p>欣賞巨大黑潮之海水槽、鯨鯊與海洋生物，預留約 2–3 小時。</p></div></div>
+   <div class="stop"><div class="time">13:30</div><div><h3>海洋博公園周邊</h3><p>依交通時間選擇海景散步或園區其他設施，午餐可在園區內解決。</p></div></div>
+   <div class="stop"><div class="time">下午</div><div><h3>返回那霸</h3><p>搭乘預約巴士回市區。晚餐安排在飯店附近，避免排太滿。</p></div></div>
+  </div>
+  <div class="day-tools">
+   <button type="button" class="add-stop">＋ 新增行程</button>
+   <button type="button" class="reset-day">還原本日原始內容</button>
+  </div>
+ </article>
+ <article class="day" data-day-card="3">
+  <div class="day-head"><strong>DAY 4｜悠閒返程</strong><small>最後採買・回家</small></div>
+  <div class="edit-hint">✏️ 可直接點選下方時間、景點名稱與介紹文字進行編輯</div><div class="day-body" contenteditable="true" spellcheck="true">
+   <div class="stop"><div class="time">上午</div><div><h3>首里城公園 <span class="must">必去</span></h3><p>搭單軌電車至首里一帶，散步認識琉球王國歷史；參觀範圍依修復工程公告為準。</p><span class="tag">單軌電車＋步行</span></div></div>
+   <div class="stop"><div class="time">中午</div><div><h3>最後一碗沖繩麵</h3><p>回市區享用午餐，整理行李、確認退稅與伴手禮。</p></div></div>
+   <div class="stop"><div class="time">依航班</div><div><h3>前往那霸機場</h3><p>搭單軌電車或計程車前往機場，預留足夠報到與安檢時間。</p></div></div>
+  </div>
+  <div class="day-tools">
+   <button type="button" class="add-stop">＋ 新增行程</button>
+   <button type="button" class="reset-day">還原本日原始內容</button>
+  </div>
+ </article>
+</section>
+
+<section class="panel">
+ <h2>🧳 出發前小提醒</h2>
+ <div class="tips">
+  <div class="tip"><b>交通安排</b>北部水族館日交通時間較長，優先確認來回巴士並預約座位；瀨長島也請先查當日接駁。</div>
+  <div class="tip"><b>住宿位置</b>建議住在縣廳前、旭橋或牧志站附近，搭單軌與吃飯都方便。</div>
+  <div class="tip"><b>天氣與防曬</b>海邊日照強，準備帽子、防曬、雨具與好走的鞋。</div>
+  <div class="tip"><b>行程彈性</b>遇到下雨或海風較大，可把市場、國際通與室內景點互相調換。</div>
+ </div>
+ <div class="links">
+  <a class="btn" href="https://www.okinawastory.jp/" target="_blank" rel="noopener">沖繩官方旅遊資訊 ↗</a>
+  <a class="btn" href="https://churaumi.okinawa/" target="_blank" rel="noopener">美麗海水族館官網 ↗</a>
+  <a class="btn" href="https://www.yui-rail.co.jp/" target="_blank" rel="noopener">沖繩單軌電車 ↗</a>
+  <a class="btn" href="https://www.google.com/maps/search/?api=1&query=Okinawa" target="_blank" rel="noopener">開啟沖繩地圖 ↗</a>
+ </div>
+</section>
+
+<section id="hotel" class="panel" style="background:var(--cream)">
+ <h2>🏡 住宿資訊</h2>
+ <p class="section-note">建議以那霸市區連住三晚為基地，以下欄位可自行填寫。</p>
+ <div class="lodging">
+  <div><b>飯店名稱</b><input placeholder="輸入飯店名稱"></div>
+  <div><b>入住／退房</b><input placeholder="入住日期・退房日期"></div>
+  <div><b>地址／最近車站</b><input placeholder="輸入地址或車站"></div>
+  <div><b>訂房備註</b><input placeholder="訂房編號、入住時間等"></div>
+ </div>
+</section>
+<section id="checklist" class="panel" style="background:#FDF4F2">
+ <h2>☑️ 旅行待辦清單</h2>
+ <p class="section-note">可自行勾選，完成項目會保留在目前頁面。</p>
+ <div class="checklist">
+  <label class="checkitem"><input type="checkbox">確認護照效期</label>
+  <label class="checkitem"><input type="checkbox">確認機票與行李額度</label>
+  <label class="checkitem"><input type="checkbox">預訂三晚住宿</label>
+  <label class="checkitem"><input type="checkbox">預約美麗海往返交通</label>
+  <label class="checkitem"><input type="checkbox">確認水族館營業時間與門票</label>
+  <label class="checkitem"><input type="checkbox">準備網路／SIM 卡</label>
+  <label class="checkitem"><input type="checkbox">準備日圓與信用卡</label>
+  <label class="checkitem"><input type="checkbox">確認旅遊平安險</label>
+  <label class="checkitem"><input type="checkbox">下載離線地圖</label>
+  <label class="checkitem"><input type="checkbox">確認機場往返交通</label>
+ </div>
+</section>
+<h2 id="budget">💰 預算抓法（每人概估）</h2>
+<table class="budget">
+ <tr><th>項目</th><th>預算參考</th><th>備註</th></tr>
+ <tr><td>機票</td><td>NT$6,000–12,000</td><td>依出發地、日期與行李需求</td></tr>
+ <tr><td>住宿 3 晚</td><td>NT$3,000–6,000</td><td>雙人房分攤估算</td></tr>
+ <tr><td>餐飲</td><td>NT$2,500–4,000</td><td>一般餐食與一兩次特色餐</td></tr>
+ <tr><td>交通／門票</td><td>NT$2,000–3,500</td><td>含北部交通與水族館，依方案調整</td></tr>
+ <tr><th>合計</th><th>約 NT$13,500–25,500</th><th>不含大量購物</th></tr>
+</table>
+<footer>海風日和 · OKINAWA TRAVEL NOTE<br>本行程為規劃範例，請依實際航班、營業時間、交通班次與天候調整。</footer>
+</div>
+<script>
+const tabs = document.querySelectorAll('.day-tabs button');
+const cards = document.querySelectorAll('[data-day-card]');
+tabs.forEach(btn => btn.addEventListener('click', () => {
+  tabs.forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const choice = btn.dataset.day;
+  cards.forEach(card => card.classList.toggle('is-hidden', choice !== 'all' && card.dataset.dayCard !== choice));
+}));
+const dateInput = document.getElementById('departDate');
+const countText = document.getElementById('countText');
+function updateCountdown(){
+ if(!dateInput.value){countText.textContent='設定日期，開始倒數 ✈';return;}
+ const target = new Date(dateInput.value+'T00:00:00');
+ const today = new Date(); today.setHours(0,0,0,0);
+ const diff = Math.ceil((target-today)/86400000);
+ countText.textContent = diff > 0 ? `距離出發還有 ${diff} 天 ✈` : diff === 0 ? '今天出發！旅途愉快 ✈' : `已出發 ${Math.abs(diff)} 天`;
+}
+dateInput.addEventListener('change', () => {updateCountdown(); loadWeather();});
+
+function updateClocks(){
+ const now = new Date();
+ document.getElementById('taiwanClock').textContent = new Intl.DateTimeFormat('zh-TW',{timeZone:'Asia/Taipei',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}).format(now);
+ document.getElementById('japanClock').textContent = new Intl.DateTimeFormat('ja-JP',{timeZone:'Asia/Tokyo',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}).format(now);
+}
+updateClocks(); setInterval(updateClocks,1000);
+
+document.getElementById('winterToggle').addEventListener('click',()=>{
+ document.body.classList.toggle('winter');
+ const active=document.body.classList.contains('winter');
+ document.getElementById('winterToggle').textContent=active?'🌸 回到原本配色':'❄️ 冬季氛圍';
+});
+
+const weatherPlaces=[
+ {name:'那霸',lat:26.2124,lon:127.6809},
+ {name:'南部・瀨長島',lat:26.1747,lon:127.6531},
+ {name:'本部町・美麗海',lat:26.6944,lon:127.8778},
+ {name:'首里',lat:26.2172,lon:127.7195}
+];
+function weatherIcon(code){
+ if(code===0)return '☀️';
+ if([1,2].includes(code))return '🌤️';
+ if(code===3)return '☁️';
+ if([45,48].includes(code))return '🌫️';
+ if([51,53,55,56,57].includes(code))return '🌦️';
+ if([61,63,65,66,67,80,81,82].includes(code))return '🌧️';
+ if([71,73,75,77,85,86].includes(code))return '❄️';
+ if([95,96,99].includes(code))return '⛈️';
+ return '🌈';
+}
+async function loadWeather(){
+ const grid=document.getElementById('weatherGrid');
+ const status=document.getElementById('weatherStatus');
+ if(!dateInput.value){
+  status.textContent='請先設定出發日期，再查詢對應日期的天氣。天氣預報通常僅提供未來約 16 天資料。';
+  return;
+ }
+ const start=new Date(dateInput.value+'T00:00:00');
+ const dates=weatherPlaces.map((_,i)=>{const d=new Date(start);d.setDate(d.getDate()+i);return d.toISOString().slice(0,10)});
+ grid.innerHTML=weatherPlaces.map((p,i)=>`<div class="weather-day"><b>DAY ${i+1} ${p.name}</b><div class="emoji">⏳</div><small>查詢中…</small></div>`).join('');
+ status.textContent='正在連線取得日本氣象預報…';
+ try{
+  const results=await Promise.all(weatherPlaces.map(async(p,i)=>{
+   const url=`https://api.open-meteo.com/v1/forecast?latitude=${p.lat}&longitude=${p.lon}&daily=weather_code,temperature_2m_max,temperature_2m_min&timezone=Asia%2FTokyo&start_date=${dates[i]}&end_date=${dates[i]}`;
+   const res=await fetch(url); if(!res.ok)throw new Error('forecast unavailable');
+   return await res.json();
+  }));
+  grid.innerHTML=results.map((r,i)=>{
+   if(!r.daily||!r.daily.time||!r.daily.time.length)return `<div class="weather-day"><b>DAY ${i+1} ${weatherPlaces[i].name}</b><div class="emoji">🗓️</div><small>${dates[i]}<br>此日期暫無預報</small></div>`;
+   const d=r.daily;
+   return `<div class="weather-day"><b>DAY ${i+1} ${weatherPlaces[i].name}</b><div class="emoji">${weatherIcon(d.weather_code[0])}</div><strong>${Math.round(d.temperature_2m_max[0])}° / ${Math.round(d.temperature_2m_min[0])}°C</strong><br><small>${dates[i]}</small></div>`;
+  }).join('');
+  status.textContent='資料來源：Open-Meteo。天氣預報可能隨時間更新，出發前請再次確認；超出預報範圍時將顯示無資料。';
+ }catch(e){
+  grid.innerHTML=weatherPlaces.map((p,i)=>`<div class="weather-day"><b>DAY ${i+1} ${p.name}</b><div class="emoji">🌤️</div><small>${dates[i]}<br>目前無法取得資料</small></div>`).join('');
+  status.textContent='暫時無法連線天氣服務。請確認網路連線，或稍後按「更新天氣」。';
+ }
+}
+document.getElementById('refreshWeather').addEventListener('click',loadWeather);
+
+if(dateInput.value)loadWeather();
+
+// 行程手動編輯：自動儲存在此瀏覽器，下次開啟同一檔案時可保留。
+const itineraryKey='okinawa_4d3n_editable_itinerary_v1';
+const dayBodies=[...document.querySelectorAll('.day-body')];
+const originalDayHTML=dayBodies.map(el=>el.innerHTML);
+try{
+ const saved=JSON.parse(localStorage.getItem(itineraryKey)||'null');
+ if(Array.isArray(saved)&&saved.length===dayBodies.length){
+  dayBodies.forEach((el,i)=>{if(typeof saved[i]==='string')el.innerHTML=saved[i];});
+ }
+}catch(e){}
+function saveItinerary(){
+ try{localStorage.setItem(itineraryKey,JSON.stringify(dayBodies.map(el=>el.innerHTML)));}
+ catch(e){console.warn('此瀏覽器無法儲存行程編輯內容。',e);}
+}
+dayBodies.forEach(el=>el.addEventListener('input',saveItinerary));
+document.querySelectorAll('.day').forEach((day,index)=>{
+ day.querySelector('.add-stop').addEventListener('click',()=>{
+  const time=prompt('請輸入時間，例如：15:00','下午');
+  if(time===null)return;
+  const title=prompt('請輸入景點或行程名稱','新景點');
+  if(title===null)return;
+  const desc=prompt('請輸入行程介紹','補充交通方式、地址或備註');
+  if(desc===null)return;
+  const stop=document.createElement('div'); stop.className='stop';
+  const timeEl=document.createElement('div'); timeEl.className='time'; timeEl.textContent=time;
+  const detail=document.createElement('div');
+  const heading=document.createElement('h3'); heading.textContent=title;
+  const paragraph=document.createElement('p'); paragraph.textContent=desc;
+  detail.append(heading,paragraph); stop.append(timeEl,detail);
+  day.querySelector('.day-body').append(stop); saveItinerary();
+ });
+ day.querySelector('.reset-day').addEventListener('click',()=>{
+  if(!confirm('確定還原這一天的原始行程？你手動修改的內容將被取代。'))return;
+  dayBodies[index].innerHTML=originalDayHTML[index]; saveItinerary();
+ });
+});
+
+</script>
+<div class="install-banner" id="installBanner">
+ <span style="flex:1;font-size:14px">🌺 將沖繩旅遊手帖安裝到手機桌面</span>
+ <button id="installApp">安裝</button><button class="close-install" id="closeInstall">稍後</button>
+</div>
+<script>
+let deferredInstallPrompt=null;
+const installBanner=document.getElementById('installBanner');
+window.addEventListener('beforeinstallprompt',event=>{
+ event.preventDefault(); deferredInstallPrompt=event; installBanner.style.display='flex';
+});
+document.getElementById('installApp').addEventListener('click',async()=>{
+ if(!deferredInstallPrompt){
+  alert('請使用 Chrome 網址列右側選單，選擇「安裝應用程式」或「新增至主畫面」。');
+  return;
+ }
+ deferredInstallPrompt.prompt();
+ await deferredInstallPrompt.userChoice;
+ deferredInstallPrompt=null; installBanner.style.display='none';
+});
+document.getElementById('closeInstall').addEventListener('click',()=>installBanner.style.display='none');
+if('serviceWorker' in navigator && (location.protocol==='https:' || location.hostname==='localhost')){
+ window.addEventListener('load',()=>navigator.serviceWorker.register('./service-worker.js').catch(console.error));
+}
+</script>
+</body>
+</html>
