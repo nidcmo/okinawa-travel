@@ -126,6 +126,14 @@ body.winter .navbar{background:rgba(234,244,252,.95)}
 .install-banner button{font:inherit;border:2px solid #3E3A39;border-radius:20px;padding:7px 12px;background:#FAD77B}
 .install-banner .close-install{background:white}
 </style>
+
+<style>
+.backup-panel{margin:18px auto;padding:16px;background:#eef8f7;border:2px solid #3E3A39;border-radius:20px;max-width:900px}
+.backup-panel h2{margin:0 0 6px;font-size:1.25rem}.backup-panel p{margin:5px 0 12px;font-size:.92rem;line-height:1.6}
+.backup-actions{display:flex;flex-wrap:wrap;gap:9px}.backup-actions button{font:inherit;font-weight:700;border:2px solid #3E3A39;border-radius:14px;padding:10px 14px;background:#FAD77B;color:#3E3A39}
+.backup-actions button.secondary{background:#fff}.backup-status{display:block;margin-top:10px;font-size:.88rem;color:#35645e}
+</style>
+
 </head>
 <body>
 <div class="wrap">
@@ -133,6 +141,19 @@ body.winter .navbar{background:rgba(234,244,252,.95)}
  <a href="#itinerary">每日行程</a><a href="#flight">航班資訊</a><a href="#hotel">住宿資訊</a>
  <a href="#checklist">待辦清單</a><a href="#budget">旅費預算</a><button class="season-btn" id="winterToggle" type="button">❄️ 冬季氛圍</button>
 </nav>
+
+<section class="backup-panel" aria-label="行程資料備份與還原">
+ <h2>💾 行程儲存與備份</h2>
+ <p>行程修改會自動暫存在這台手機。出發前或重要修改後，建議按「一鍵儲存」，再下載備份檔保存；換手機時可用「資料還原」匯入。</p>
+ <div class="backup-actions">
+  <button type="button" id="saveAllData">✓ 一鍵儲存</button>
+  <button type="button" class="secondary" id="exportBackup">⬇ 資料備份</button>
+  <button type="button" class="secondary" id="importBackup">⬆ 資料還原</button>
+  <input type="file" id="backupFile" accept=".json,application/json" hidden>
+ </div>
+ <small class="backup-status" id="backupStatus" role="status">資料會自動儲存於目前瀏覽器；備份檔請另外保存。</small>
+</section>
+
 <header class="hero">
  <span class="kicker">OKINAWA · TRAVEL JOURNAL</span>
  <div class="stamp">島時間<br>慢慢走</div>
@@ -442,5 +463,74 @@ if('serviceWorker' in navigator && (location.protocol==='https:' || location.hos
  window.addEventListener('load',()=>navigator.serviceWorker.register('./service-worker.js').catch(console.error));
 }
 </script>
+
+<script>
+// 一鍵儲存、JSON 備份與還原：涵蓋可編輯行程、表單欄位、日期與待辦勾選。
+(function(){
+ const STORAGE_KEY='okinawa_travel_all_data_v1';
+ const statusEl=document.getElementById('backupStatus');
+ const backupFile=document.getElementById('backupFile');
+ const managedSelectors='input:not([type="file"]):not([type="button"]):not([type="submit"]), textarea, select';
+ function getFields(){
+  return [...document.querySelectorAll(managedSelectors)].map((el,index)=>({
+   index, tag:el.tagName.toLowerCase(), type:el.type||'', value:el.type==='checkbox'||el.type==='radio'?el.checked:el.value
+  }));
+ }
+ function getData(){
+  const days=[...document.querySelectorAll('.day-body')].map(el=>el.innerHTML);
+  return {format:'okinawa-travel-backup',version:1,exportedAt:new Date().toISOString(),fields:getFields(),days};
+ }
+ function persist(show=true){
+  try{
+   const data=getData();
+   localStorage.setItem(STORAGE_KEY,JSON.stringify(data));
+   // Keep the legacy itinerary key so previously saved itinerary edits remain compatible.
+   localStorage.setItem('okinawa_4d3n_editable_itinerary_v1',JSON.stringify(data.days));
+   if(show) statusEl.textContent='✅ 已儲存於這台手機：'+new Date().toLocaleString();
+   return data;
+  }catch(err){statusEl.textContent='⚠️ 儲存失敗，請確認手機儲存空間或瀏覽器設定。';throw err;}
+ }
+ function applyData(data){
+  if(!data||data.format!=='okinawa-travel-backup'||data.version!==1) throw new Error('備份檔格式不正確或版本不支援。');
+  const fields=[...document.querySelectorAll(managedSelectors)];
+  if(Array.isArray(data.fields)) data.fields.forEach(item=>{
+   const el=fields[item.index]; if(!el||el.tagName.toLowerCase()!==item.tag) return;
+   if(el.type==='checkbox'||el.type==='radio') el.checked=!!item.value; else el.value=item.value??'';
+  });
+  const days=[...document.querySelectorAll('.day-body')];
+  if(Array.isArray(data.days)&&data.days.length===days.length){
+   days.forEach((el,i)=>{if(typeof data.days[i]==='string')el.innerHTML=data.days[i];});
+  }
+  // Trigger input/change listeners for app components that depend on form values.
+  document.querySelectorAll(managedSelectors).forEach(el=>{el.dispatchEvent(new Event('input',{bubbles:true}));el.dispatchEvent(new Event('change',{bubbles:true}));});
+  persist(false);
+ }
+ document.getElementById('saveAllData').addEventListener('click',()=>{try{persist(true);}catch(e){}});
+ document.getElementById('exportBackup').addEventListener('click',()=>{
+  try{
+   const data=persist(false); const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+   const url=URL.createObjectURL(blob); const a=document.createElement('a');
+   const date=new Date().toISOString().slice(0,10); a.href=url; a.download='okinawa-travel-backup-'+date+'.json';
+   document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);
+   statusEl.textContent='📦 備份檔已產生，請確認下載資料夾內有 JSON 檔。';
+  }catch(e){statusEl.textContent='⚠️ 無法建立備份檔。';}
+ });
+ document.getElementById('importBackup').addEventListener('click',()=>backupFile.click());
+ backupFile.addEventListener('change',async()=>{
+  const file=backupFile.files&&backupFile.files[0]; if(!file)return;
+  if(!confirm('還原備份會覆蓋目前手機上的行程與填寫資料，確定繼續嗎？')){backupFile.value='';return;}
+  try{const data=JSON.parse(await file.text());applyData(data);statusEl.textContent='✅ 資料還原完成！已儲存到這台手機。';}
+  catch(err){statusEl.textContent='❌ 還原失敗：'+(err.message||'請確認選擇正確的 JSON 備份檔。');}
+  backupFile.value='';
+ });
+ // Restore latest app-wide local save on load, if present. The existing itinerary loader runs earlier.
+ try{const raw=localStorage.getItem(STORAGE_KEY);if(raw){const data=JSON.parse(raw);applyData(data);statusEl.textContent='✅ 已載入這台手機上次儲存的資料。';}}
+ catch(e){statusEl.textContent='資料載入時遇到問題；仍可匯入備份檔還原。';}
+ // Keep all editable fields autosaved too; backup is still recommended for cross-device recovery.
+ document.addEventListener('input',e=>{if(e.target.matches(managedSelectors)||e.target.closest('.day-body'))try{persist(false);}catch(err){} });
+ document.addEventListener('change',e=>{if(e.target.matches(managedSelectors)||e.target.closest('.day-body'))try{persist(false);}catch(err){} });
+})();
+</script>
+
 </body>
 </html>
