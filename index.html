@@ -87,6 +87,8 @@ body.winter .navbar{background:rgba(234,244,252,.95)}
 .clock b{display:block;font-size:12px;color:var(--muted)}
 .clock span{font-size:25px;font-weight:bold;font-variant-numeric:tabular-nums}
 .weather-status{font-size:13px;color:var(--muted);margin-top:8px}
+.weather-manual{margin-top:18px;padding-top:14px;border-top:1px dashed #9CBBCB}.weather-manual h3{margin:0 0 4px;font-size:19px}.weather-manual>p{font-size:13px;color:var(--muted);margin:0 0 12px}.weather-edit-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.weather-edit-card{background:#fff;border:1.5px solid var(--ink);border-radius:14px;padding:12px}.weather-edit-card>b{display:block;margin-bottom:8px}.weather-edit-card label{display:block;font-size:12px;color:var(--muted);margin:6px 0}.weather-edit-card input{display:block;width:100%;min-width:0;border:1px solid #C8D6DC;border-radius:8px;padding:8px;font:inherit;font-size:14px;color:var(--ink);background:#FFFEFB}.weather-edit-pair{display:grid;grid-template-columns:1fr 1fr;gap:8px}.weather-edit-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:12px}.weather-edit-actions button{font:inherit;border:2px solid var(--ink);border-radius:20px;padding:7px 13px;background:var(--yellow);font-weight:bold}.weather-edit-actions small{font-size:12px;color:var(--muted)}
+@media(max-width:600px){.weather-edit-grid{grid-template-columns:1fr}}
 .navbar{position:sticky;top:0;z-index:10;display:flex;gap:8px;justify-content:center;flex-wrap:wrap;
  background:rgba(255,251,243,.94);backdrop-filter:blur(8px);padding:10px;border-bottom:2px solid var(--line)}
 .navbar a{font-size:14px;text-decoration:none;border:2px solid var(--ink);border-radius:22px;padding:5px 13px;background:white}
@@ -205,6 +207,17 @@ body.winter .navbar{background:rgba(234,244,252,.95)}
   <div class="weather-day"><b>DAY 4 首里</b><div class="emoji">🏯</div><small>等待天氣資料…</small></div>
  </div>
  <div class="weather-status" id="weatherStatus">請先設定出發日期；天氣服務需連接網路，通常可查詢未來約 16 天預報。</div>
+ <div class="weather-manual" id="weatherManual">
+  <h3>📝 每日天氣手動紀錄</h3>
+  <p>可依氣象預報或出發前實際天氣，自行修改天氣描述、溫度與備註；內容會自動儲存，也會納入資料備份。</p>
+  <div class="weather-edit-grid">
+   <div class="weather-edit-card"><b>DAY 1｜那霸</b><label>天氣<input data-weather="0" data-field="condition" placeholder="例如：晴時多雲"></label><div class="weather-edit-pair"><label>最高溫 °C<input data-weather="0" data-field="high" inputmode="decimal" placeholder="28"></label><label>最低溫 °C<input data-weather="0" data-field="low" inputmode="decimal" placeholder="23"></label></div><label>備註<input data-weather="0" data-field="note" placeholder="例如：午後可能有雨"></label></div>
+   <div class="weather-edit-card"><b>DAY 2｜南部・瀨長島</b><label>天氣<input data-weather="1" data-field="condition" placeholder="例如：多雲"></label><div class="weather-edit-pair"><label>最高溫 °C<input data-weather="1" data-field="high" inputmode="decimal" placeholder="28"></label><label>最低溫 °C<input data-weather="1" data-field="low" inputmode="decimal" placeholder="23"></label></div><label>備註<input data-weather="1" data-field="note" placeholder="例如：海邊風大"></label></div>
+   <div class="weather-edit-card"><b>DAY 3｜本部町・美麗海</b><label>天氣<input data-weather="2" data-field="condition" placeholder="例如：短暫陣雨"></label><div class="weather-edit-pair"><label>最高溫 °C<input data-weather="2" data-field="high" inputmode="decimal" placeholder="27"></label><label>最低溫 °C<input data-weather="2" data-field="low" inputmode="decimal" placeholder="22"></label></div><label>備註<input data-weather="2" data-field="note" placeholder="例如：戶外行程帶雨具"></label></div>
+   <div class="weather-edit-card"><b>DAY 4｜首里</b><label>天氣<input data-weather="3" data-field="condition" placeholder="例如：晴朗"></label><div class="weather-edit-pair"><label>最高溫 °C<input data-weather="3" data-field="high" inputmode="decimal" placeholder="28"></label><label>最低溫 °C<input data-weather="3" data-field="low" inputmode="decimal" placeholder="23"></label></div><label>備註<input data-weather="3" data-field="note" placeholder="例如：適合散步"></label></div>
+  </div>
+  <div class="weather-edit-actions"><button type="button" id="saveWeatherNotes">💾 儲存每日天氣</button><small id="weatherSaveStatus" role="status">修改後會自動儲存於這台手機。</small></div>
+ </div>
 </section>
 <h2 id="itinerary">🌺 每日行程</h2>
 <div class="day-tabs" role="tablist" aria-label="切換旅遊日期">
@@ -352,6 +365,33 @@ document.getElementById('winterToggle').addEventListener('click',()=>{
  document.getElementById('winterToggle').textContent=active?'🌸 回到原本配色':'❄️ 冬季氛圍';
 });
 
+// 每日天氣手動紀錄：獨立儲存，並同步納入 JSON 備份。
+const weatherNotesKey='okinawa_weather_notes_v1';
+function getWeatherNotes(){
+ const rows=[0,1,2,3].map(i=>({
+  condition:document.querySelector(`[data-weather="${i}"][data-field="condition"]`)?.value||'',
+  high:document.querySelector(`[data-weather="${i}"][data-field="high"]`)?.value||'',
+  low:document.querySelector(`[data-weather="${i}"][data-field="low"]`)?.value||'',
+  note:document.querySelector(`[data-weather="${i}"][data-field="note"]`)?.value||''
+ }));
+ return rows;
+}
+function setWeatherNotes(rows){
+ if(!Array.isArray(rows))return;
+ rows.forEach((row,i)=>Object.entries(row||{}).forEach(([field,value])=>{
+  const el=document.querySelector(`[data-weather="${i}"][data-field="${field}"]`);
+  if(el)el.value=value??'';
+ }));
+}
+function saveWeatherNotes(show=true){
+ try{localStorage.setItem(weatherNotesKey,JSON.stringify(getWeatherNotes()));
+  const msg=document.getElementById('weatherSaveStatus');if(msg&&show)msg.textContent='✅ 每日天氣已儲存：'+new Date().toLocaleTimeString();
+ }catch(e){const msg=document.getElementById('weatherSaveStatus');if(msg)msg.textContent='⚠️ 儲存失敗，請確認瀏覽器儲存空間。';}
+}
+try{setWeatherNotes(JSON.parse(localStorage.getItem(weatherNotesKey)||'null'));}catch(e){}
+document.querySelectorAll('[data-weather][data-field]').forEach(el=>el.addEventListener('input',()=>saveWeatherNotes(false)));
+document.getElementById('saveWeatherNotes').addEventListener('click',()=>saveWeatherNotes(true));
+
 const weatherPlaces=[
  {name:'那霸',lat:26.2124,lon:127.6809},
  {name:'南部・瀨長島',lat:26.1747,lon:127.6531},
@@ -478,7 +518,7 @@ if('serviceWorker' in navigator && (location.protocol==='https:' || location.hos
  }
  function getData(){
   const days=[...document.querySelectorAll('.day-body')].map(el=>el.innerHTML);
-  return {format:'okinawa-travel-backup',version:1,exportedAt:new Date().toISOString(),fields:getFields(),days};
+  return {format:'okinawa-travel-backup',version:1,exportedAt:new Date().toISOString(),fields:getFields(),days,weatherNotes:getWeatherNotes()};
  }
  function persist(show=true){
   try{
@@ -501,6 +541,7 @@ if('serviceWorker' in navigator && (location.protocol==='https:' || location.hos
   if(Array.isArray(data.days)&&data.days.length===days.length){
    days.forEach((el,i)=>{if(typeof data.days[i]==='string')el.innerHTML=data.days[i];});
   }
+  if(Array.isArray(data.weatherNotes)){setWeatherNotes(data.weatherNotes);saveWeatherNotes(false);}
   // Trigger input/change listeners for app components that depend on form values.
   document.querySelectorAll(managedSelectors).forEach(el=>{el.dispatchEvent(new Event('input',{bubbles:true}));el.dispatchEvent(new Event('change',{bubbles:true}));});
   persist(false);
