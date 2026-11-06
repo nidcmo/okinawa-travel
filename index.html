@@ -198,26 +198,16 @@ body.winter .navbar{background:rgba(234,244,252,.95)}
  </div>
 </section>
 <section class="weather-panel" id="weather">
- <div class="weather-top"><div><h2 style="margin:0">☀️ 沖繩每日天氣</h2><small>依每日行程地點顯示預報與氣溫</small></div>
+ <div class="weather-top"><div><h2 style="margin:0">☀️ 沖繩每日天氣</h2><small>可直接點選每日天氣卡片修改；按「更新天氣」可重新取得線上預報。</small></div>
  <button class="btn" id="refreshWeather" type="button">更新天氣 ↻</button></div>
- <div class="weather-grid" id="weatherGrid">
+ <div class="weather-grid" id="weatherGrid" contenteditable="true" spellcheck="true" aria-label="可編輯的每日天氣內容">
   <div class="weather-day"><b>DAY 1 那霸</b><div class="emoji">🌤️</div><small>等待天氣資料…</small></div>
   <div class="weather-day"><b>DAY 2 南部</b><div class="emoji">🌊</div><small>等待天氣資料…</small></div>
   <div class="weather-day"><b>DAY 3 本部町</b><div class="emoji">🐠</div><small>等待天氣資料…</small></div>
   <div class="weather-day"><b>DAY 4 首里</b><div class="emoji">🏯</div><small>等待天氣資料…</small></div>
  </div>
  <div class="weather-status" id="weatherStatus">請先設定出發日期；天氣服務需連接網路，通常可查詢未來約 16 天預報。</div>
- <div class="weather-manual" id="weatherManual">
-  <h3>📝 每日天氣手動紀錄</h3>
-  <p>可依氣象預報或出發前實際天氣，自行修改天氣描述、溫度與備註；內容會自動儲存，也會納入資料備份。</p>
-  <div class="weather-edit-grid">
-   <div class="weather-edit-card"><b>DAY 1｜那霸</b><label>天氣<input data-weather="0" data-field="condition" placeholder="例如：晴時多雲"></label><div class="weather-edit-pair"><label>最高溫 °C<input data-weather="0" data-field="high" inputmode="decimal" placeholder="28"></label><label>最低溫 °C<input data-weather="0" data-field="low" inputmode="decimal" placeholder="23"></label></div><label>備註<input data-weather="0" data-field="note" placeholder="例如：午後可能有雨"></label></div>
-   <div class="weather-edit-card"><b>DAY 2｜南部・瀨長島</b><label>天氣<input data-weather="1" data-field="condition" placeholder="例如：多雲"></label><div class="weather-edit-pair"><label>最高溫 °C<input data-weather="1" data-field="high" inputmode="decimal" placeholder="28"></label><label>最低溫 °C<input data-weather="1" data-field="low" inputmode="decimal" placeholder="23"></label></div><label>備註<input data-weather="1" data-field="note" placeholder="例如：海邊風大"></label></div>
-   <div class="weather-edit-card"><b>DAY 3｜本部町・美麗海</b><label>天氣<input data-weather="2" data-field="condition" placeholder="例如：短暫陣雨"></label><div class="weather-edit-pair"><label>最高溫 °C<input data-weather="2" data-field="high" inputmode="decimal" placeholder="27"></label><label>最低溫 °C<input data-weather="2" data-field="low" inputmode="decimal" placeholder="22"></label></div><label>備註<input data-weather="2" data-field="note" placeholder="例如：戶外行程帶雨具"></label></div>
-   <div class="weather-edit-card"><b>DAY 4｜首里</b><label>天氣<input data-weather="3" data-field="condition" placeholder="例如：晴朗"></label><div class="weather-edit-pair"><label>最高溫 °C<input data-weather="3" data-field="high" inputmode="decimal" placeholder="28"></label><label>最低溫 °C<input data-weather="3" data-field="low" inputmode="decimal" placeholder="23"></label></div><label>備註<input data-weather="3" data-field="note" placeholder="例如：適合散步"></label></div>
-  </div>
-  <div class="weather-edit-actions"><button type="button" id="saveWeatherNotes">💾 儲存每日天氣</button><small id="weatherSaveStatus" role="status">修改後會自動儲存於這台手機。</small></div>
- </div>
+
 </section>
 <h2 id="itinerary">🌺 每日行程</h2>
 <div class="day-tabs" role="tablist" aria-label="切換旅遊日期">
@@ -280,8 +270,8 @@ body.winter .navbar{background:rgba(234,244,252,.95)}
 </section>
 
 <section class="panel">
- <h2>🧳 出發前小提醒</h2>
- <div class="tips">
+ <h2>🧳 出發前小提醒</h2><p class="section-note">點選提醒文字即可編輯，修改後自動儲存。</p>
+ <div class="tips" id="tips" contenteditable="true" spellcheck="true" aria-label="可編輯出發前小提醒">
   <div class="tip"><b>交通安排</b>北部水族館日交通時間較長，優先確認來回巴士並預約座位；瀨長島也請先查當日接駁。</div>
   <div class="tip"><b>住宿位置</b>建議住在縣廳前、旭橋或牧志站附近，搭單軌與吃飯都方便。</div>
   <div class="tip"><b>天氣與防曬</b>海邊日照強，準備帽子、防曬、雨具與好走的鞋。</div>
@@ -307,22 +297,22 @@ body.winter .navbar{background:rgba(234,244,252,.95)}
 </section>
 <section id="checklist" class="panel" style="background:#FDF4F2">
  <h2>☑️ 旅行待辦清單</h2>
- <p class="section-note">可自行勾選，完成項目會保留在目前頁面。</p>
+ <p class="section-note">可直接修改文字、勾選完成項目；修改會自動儲存，也會納入備份。</p>
  <div class="checklist">
-  <label class="checkitem"><input type="checkbox">確認護照效期</label>
-  <label class="checkitem"><input type="checkbox">確認機票與行李額度</label>
-  <label class="checkitem"><input type="checkbox">預訂三晚住宿</label>
-  <label class="checkitem"><input type="checkbox">預約美麗海往返交通</label>
-  <label class="checkitem"><input type="checkbox">確認水族館營業時間與門票</label>
-  <label class="checkitem"><input type="checkbox">準備網路／SIM 卡</label>
-  <label class="checkitem"><input type="checkbox">準備日圓與信用卡</label>
-  <label class="checkitem"><input type="checkbox">確認旅遊平安險</label>
-  <label class="checkitem"><input type="checkbox">下載離線地圖</label>
-  <label class="checkitem"><input type="checkbox">確認機場往返交通</label>
+  <label class="checkitem"><input type="checkbox"><span contenteditable="true" spellcheck="true">確認護照效期</span></label>
+  <label class="checkitem"><input type="checkbox"><span contenteditable="true" spellcheck="true">確認機票與行李額度</span></label>
+  <label class="checkitem"><input type="checkbox"><span contenteditable="true" spellcheck="true">預訂三晚住宿</span></label>
+  <label class="checkitem"><input type="checkbox"><span contenteditable="true" spellcheck="true">預約美麗海往返交通</span></label>
+  <label class="checkitem"><input type="checkbox"><span contenteditable="true" spellcheck="true">確認水族館營業時間與門票</span></label>
+  <label class="checkitem"><input type="checkbox"><span contenteditable="true" spellcheck="true">準備網路／SIM 卡</span></label>
+  <label class="checkitem"><input type="checkbox"><span contenteditable="true" spellcheck="true">準備日圓與信用卡</span></label>
+  <label class="checkitem"><input type="checkbox"><span contenteditable="true" spellcheck="true">確認旅遊平安險</span></label>
+  <label class="checkitem"><input type="checkbox"><span contenteditable="true" spellcheck="true">下載離線地圖</span></label>
+  <label class="checkitem"><input type="checkbox"><span contenteditable="true" spellcheck="true">確認機場往返交通</span></label>
  </div>
 </section>
-<h2 id="budget">💰 預算抓法（每人概估）</h2>
-<table class="budget">
+<h2 id="budget">💰 預算抓法（每人概估）</h2><p class="section-note">可直接點選表格文字修改金額與備註，修改後自動儲存。</p>
+<table class="budget" id="budgetTable" contenteditable="true" spellcheck="true" aria-label="可編輯預算表">
  <tr><th>項目</th><th>預算參考</th><th>備註</th></tr>
  <tr><td>機票</td><td>NT$6,000–12,000</td><td>依出發地、日期與行李需求</td></tr>
  <tr><td>住宿 3 晚</td><td>NT$3,000–6,000</td><td>雙人房分攤估算</td></tr>
@@ -365,33 +355,7 @@ document.getElementById('winterToggle').addEventListener('click',()=>{
  document.getElementById('winterToggle').textContent=active?'🌸 回到原本配色':'❄️ 冬季氛圍';
 });
 
-// 每日天氣手動紀錄：獨立儲存，並同步納入 JSON 備份。
-const weatherNotesKey='okinawa_weather_notes_v1';
-function getWeatherNotes(){
- const rows=[0,1,2,3].map(i=>({
-  condition:document.querySelector(`[data-weather="${i}"][data-field="condition"]`)?.value||'',
-  high:document.querySelector(`[data-weather="${i}"][data-field="high"]`)?.value||'',
-  low:document.querySelector(`[data-weather="${i}"][data-field="low"]`)?.value||'',
-  note:document.querySelector(`[data-weather="${i}"][data-field="note"]`)?.value||''
- }));
- return rows;
-}
-function setWeatherNotes(rows){
- if(!Array.isArray(rows))return;
- rows.forEach((row,i)=>Object.entries(row||{}).forEach(([field,value])=>{
-  const el=document.querySelector(`[data-weather="${i}"][data-field="${field}"]`);
-  if(el)el.value=value??'';
- }));
-}
-function saveWeatherNotes(show=true){
- try{localStorage.setItem(weatherNotesKey,JSON.stringify(getWeatherNotes()));
-  const msg=document.getElementById('weatherSaveStatus');if(msg&&show)msg.textContent='✅ 每日天氣已儲存：'+new Date().toLocaleTimeString();
- }catch(e){const msg=document.getElementById('weatherSaveStatus');if(msg)msg.textContent='⚠️ 儲存失敗，請確認瀏覽器儲存空間。';}
-}
-try{setWeatherNotes(JSON.parse(localStorage.getItem(weatherNotesKey)||'null'));}catch(e){}
-document.querySelectorAll('[data-weather][data-field]').forEach(el=>el.addEventListener('input',()=>saveWeatherNotes(false)));
-document.getElementById('saveWeatherNotes').addEventListener('click',()=>saveWeatherNotes(true));
-
+// 每日天氣區可直接編輯；內容納入整體儲存與 JSON 備份。
 const weatherPlaces=[
  {name:'那霸',lat:26.2124,lon:127.6809},
  {name:'南部・瀨長島',lat:26.1747,lon:127.6531},
@@ -518,7 +482,8 @@ if('serviceWorker' in navigator && (location.protocol==='https:' || location.hos
  }
  function getData(){
   const days=[...document.querySelectorAll('.day-body')].map(el=>el.innerHTML);
-  return {format:'okinawa-travel-backup',version:1,exportedAt:new Date().toISOString(),fields:getFields(),days,weatherNotes:getWeatherNotes()};
+  const editableSections=['weatherGrid','tips','budgetTable'].map(id=>({id,html:document.getElementById(id)?.innerHTML}));
+  return {format:'okinawa-travel-backup',version:2,exportedAt:new Date().toISOString(),fields:getFields(),days,sections:editableSections};
  }
  function persist(show=true){
   try{
@@ -531,7 +496,7 @@ if('serviceWorker' in navigator && (location.protocol==='https:' || location.hos
   }catch(err){statusEl.textContent='⚠️ 儲存失敗，請確認手機儲存空間或瀏覽器設定。';throw err;}
  }
  function applyData(data){
-  if(!data||data.format!=='okinawa-travel-backup'||data.version!==1) throw new Error('備份檔格式不正確或版本不支援。');
+  if(!data||data.format!=='okinawa-travel-backup'||![1,2].includes(data.version)) throw new Error('備份檔格式不正確或版本不支援。');
   const fields=[...document.querySelectorAll(managedSelectors)];
   if(Array.isArray(data.fields)) data.fields.forEach(item=>{
    const el=fields[item.index]; if(!el||el.tagName.toLowerCase()!==item.tag) return;
@@ -541,7 +506,7 @@ if('serviceWorker' in navigator && (location.protocol==='https:' || location.hos
   if(Array.isArray(data.days)&&data.days.length===days.length){
    days.forEach((el,i)=>{if(typeof data.days[i]==='string')el.innerHTML=data.days[i];});
   }
-  if(Array.isArray(data.weatherNotes)){setWeatherNotes(data.weatherNotes);saveWeatherNotes(false);}
+  if(Array.isArray(data.sections)) data.sections.forEach(item=>{const el=document.getElementById(item.id);if(el&&typeof item.html==='string')el.innerHTML=item.html;});
   // Trigger input/change listeners for app components that depend on form values.
   document.querySelectorAll(managedSelectors).forEach(el=>{el.dispatchEvent(new Event('input',{bubbles:true}));el.dispatchEvent(new Event('change',{bubbles:true}));});
   persist(false);
@@ -568,8 +533,8 @@ if('serviceWorker' in navigator && (location.protocol==='https:' || location.hos
  try{const raw=localStorage.getItem(STORAGE_KEY);if(raw){const data=JSON.parse(raw);applyData(data);statusEl.textContent='✅ 已載入這台手機上次儲存的資料。';}}
  catch(e){statusEl.textContent='資料載入時遇到問題；仍可匯入備份檔還原。';}
  // Keep all editable fields autosaved too; backup is still recommended for cross-device recovery.
- document.addEventListener('input',e=>{if(e.target.matches(managedSelectors)||e.target.closest('.day-body'))try{persist(false);}catch(err){} });
- document.addEventListener('change',e=>{if(e.target.matches(managedSelectors)||e.target.closest('.day-body'))try{persist(false);}catch(err){} });
+ document.addEventListener('input',e=>{if(e.target.matches(managedSelectors)||e.target.closest('.day-body')||e.target.closest('#weatherGrid, #tips, #budgetTable, .checkitem span[contenteditable]'))try{persist(false);}catch(err){} });
+ document.addEventListener('change',e=>{if(e.target.matches(managedSelectors)||e.target.closest('.day-body')||e.target.closest('#weatherGrid, #tips, #budgetTable, .checkitem span[contenteditable]'))try{persist(false);}catch(err){} });
 })();
 </script>
 
